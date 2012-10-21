@@ -1,7 +1,7 @@
 #include "ensitlm.h"
 #include "memory.h"
 
-#define DEBUG
+//#define DEBUG
 
 // Constructor
 Memory::Memory(sc_core::sc_module_name name, unsigned int size)
