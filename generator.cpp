@@ -17,18 +17,17 @@ void Generator::thread(void) {
 	addr_t addr_rom = ADDR_ROM;
 	
 	
-	
-	/* from ROM = P7 + P6 + P5 + P4 + P3 + P2 + P1 + P0 */
-	/* to MEM   =    P0   +    P1   +    P2   +    P3   */
 	data_t offset_rom = 0;
 	data_t offset_mem = 0;
 	for( ; offset_rom < ROM_SIZE; offset_rom += sizeof(data_t)){
 	 	socket.read(addr_rom + offset_rom, from_rom);
-		
+		data_t mask = 0;
 		for(int j=0; j < 8; j++){
-			to_mem += (from_rom & 0x0000000F);
-			to_mem <<= 8;
-			from_rom >>= 4;
+			mask = (from_rom & 0xF0000000);
+			mask >>= (j % 4) * 8;
+			to_mem += mask;
+			from_rom <<= 4;
+			
 			if((j+1)%4 == 0){
 				socket.write(addr_mem + offset_mem,to_mem);
 				offset_mem += sizeof(data_t);
