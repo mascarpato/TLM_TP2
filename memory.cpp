@@ -1,22 +1,18 @@
 #include "ensitlm.h"
 #include "memory.h"
 
-//#define DEBUG
+// #define DEBUG
 
 // Constructor
 Memory::Memory(sc_core::sc_module_name name, unsigned int size)
 	: sc_module(name), m_size(size)
 {
-
-	/* QUESTION 3 */
         storage = new ensitlm::data_t[size/sizeof(ensitlm::data_t)];
 }
 
 // Destructor
 Memory::~Memory()
 {
-
-	/* QUESTION 3 */
 	delete [] storage;
 }
 
@@ -33,7 +29,7 @@ tlm::tlm_response_status Memory::read(ensitlm::addr_t a, ensitlm::data_t& d)
 	{
 		d = storage[a/sizeof(ensitlm::data_t)];
 #ifdef DEBUG
-		std::cout << name() << ": Read  access at 0x" << std::hex << a << " (Data: 0x" << d << ")" << std::endl;
+		std::cout << name() << ": Read  access at 0x" << hex << a << " (Data: 0x" << d << ")" << std::endl;
 #endif
 		return tlm::TLM_OK_RESPONSE;
 	}
@@ -51,7 +47,7 @@ tlm::tlm_response_status Memory::write(ensitlm::addr_t a, ensitlm::data_t d)
         else
 	{
 #ifdef DEBUG
-		std::cout << name() << ": Write access at 0x" << std::hex << a << " (Data: 0x" << d << ")" << std::endl;
+		std::cout << name() << ": Write access at 0x" << hex << a << " (Data: 0x" << d << ")" << std::endl;
 #endif
 		storage[a/sizeof(ensitlm::data_t)] = d;
 		return tlm::TLM_OK_RESPONSE;

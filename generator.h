@@ -1,6 +1,7 @@
 /********************************************************************
  * Copyright (C) 2009 by Ensimag and Verimag                        *
- * Initial author: Matthieu Moy                                     *
+ * Initial author: Matthieu Moy					    *
+ * Modified by: Mauricio Altieri and João Leidens                   *
  ********************************************************************/
 
 #ifndef GENERATOR_H
@@ -25,8 +26,6 @@ SC_MODULE(Generator) {
 
         SC_HAS_PROCESS(Generator);
         Generator(sc_core::sc_module_name name);
-        
-   //     ~Generator();
  
 };
 

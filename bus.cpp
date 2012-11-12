@@ -1,9 +1,6 @@
 #include "ensitlm.h"
 #include "bus.h"
 
-#define DEBUG
-
-
 Bus::Bus(sc_core::sc_module_name name) : sc_core::sc_module(name)
 {}
 
